@@ -44,6 +44,7 @@ It is not legal for you to drive.
 
 Constraint
 Prevent the user from entering non-numeric values.
+
 Challenges
 Handle metric units.
 Look up the legal BAC limit by state and prompt for the state.
@@ -57,38 +58,37 @@ import java.util.Scanner;
 public class App {
     public static void main(String[] args) {
 
-        int ounces, weight, hours;
-        double rMen, rWomen, menBAC, womenBAC, BAC;
+        int gender, ounces, weight, hours;
+        double rMen, rWomen, menBAC, womenBAC;
         rMen = 0.73;
         rWomen = 0.66;
 
         Scanner in = new Scanner(System.in);
         System.out.print("Enter a 1 is you are male or a 2 if you are female: ");
-        String gender = in.nextLine();
+        gender = in.nextInt();
 
-        Scanner sc = new Scanner(System.in);
         System.out.print("How many ounces of alcohol did you have? ");
-        ounces = sc.nextInt();
+        ounces = in.nextInt();
 
         System.out.print("What is your weight, in pounds? ");
-        weight = sc.nextInt();
+        weight = in.nextInt();
 
         System.out.print("How many hours has it been since your last drink? ");
-        hours = sc.nextInt();
+        hours = in.nextInt();
 
         // BAC = (A × 5.14 / W × r) − .015 × H
 
         menBAC = (ounces * 5.14/weight * rMen) - .015 * hours;
         womenBAC = (ounces * 5.14/weight * rWomen) -  .015 * hours;
 
-        if (gender.equals("1")) {
+        if (gender == 1) {
             if(menBAC >= 0.08) {
                 System.out.println("Your BAC is " + menBAC +"\nIt is not legal for you to drive.");
             }
             else {
                 System.out.println("Your BAC is " + menBAC +"\nIt is legal for you to drive.");}
         }
-        else if (gender.equals ("2")) {
+        else if (gender == 2) {
             if(womenBAC >= 0.08) {
                 System.out.println("Your BAC is " + womenBAC +"\nIt is not legal for you to drive.");
             }
